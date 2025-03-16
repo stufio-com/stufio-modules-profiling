@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "stufio-modules-profiling"
+version = "0.1.0"
+description = "Stufio.com Module: Opentelemetry profiling, Prometheus metrics and performance monitoring"
+authors = [{name = "Ihar Finchuk", email = "if@if.codes"}]
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "stufio>=0.1.0",
+]
+
+[project.urls]
+repository = "https://github.com/stufio-com/stufio-modules-profiling"
+
+[tool.setuptools]
+package-dir = {"stufio.modules.profiling" = "stufio/modules/profiling"}
+packages.find = {include = ["stufio.modules.profiling", "stufio.modules.profiling.*"]}
