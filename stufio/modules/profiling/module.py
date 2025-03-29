@@ -49,7 +49,7 @@ class ProfilingModule(ModuleInterface):
         
         # Add ProfilingMiddleware if enabled
         if settings.profiling_ENABLE_PROFILING:
-            middlewares.append((ProfilingMiddleware, [], {}))
+            middlewares.append((ProfilingMiddleware, {}, {}))
             
         return middlewares
     
