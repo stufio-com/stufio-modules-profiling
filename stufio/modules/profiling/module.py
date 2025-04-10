@@ -15,16 +15,15 @@ logger = logging.getLogger(__name__)
 
 class ProfilingModule(ModuleInterface):
     """Profiling and metrics module for Stufio framework."""
-    
+
     def register(self, app: FastAPI) -> None:
         """Legacy method for backwards compatibility."""
         super().register(app)
-        
+
         # Set up OpenTelemetry if enabled
         if settings.profiling_ENABLE_OPENTELEMETRY:
-            app_settings = get_settings()
-            setup_otlp(app, app_settings.PROJECT_NAME)
-    
+            setup_otlp(app, settings.APP_NAME)
+
     def register_routes(self, app: FastAPI) -> None:
         """Register metrics endpoint."""
         if settings.profiling_ENABLE_PROMETHEUS:
@@ -32,27 +31,21 @@ class ProfilingModule(ModuleInterface):
             app.include_router(metrics_router)
         else:
             logger.info("Prometheus metrics disabled, skipping route registration")
-    
+
     def get_middlewares(self) -> List[tuple]:
         """Return middleware classes for profiling and metrics."""
-        
+
         app_settings = get_settings()
         middlewares = []
-        
+
         # Add PrometheusMiddleware if enabled
         if settings.profiling_ENABLE_PROMETHEUS:
-            middlewares.append((
-                PrometheusMiddleware, 
-                [], 
-                {"app_name": app_settings.PROJECT_NAME}
-            ))
-        
+            middlewares.append(
+                (PrometheusMiddleware, [], {"app_name": app_settings.APP_NAME})
+            )
+
         # Add ProfilingMiddleware if enabled
         if settings.profiling_ENABLE_PROFILING:
             middlewares.append((ProfilingMiddleware, {}, {}))
-            
+
         return middlewares
-    
-    def get_models(self) -> List[Any]:
-        """Return a list of database models defined by this module."""
-        return []

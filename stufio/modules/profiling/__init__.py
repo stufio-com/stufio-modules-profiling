@@ -1,5 +1,5 @@
 from .__version__ import __version__
-from .module import ProfilingModule
 from .config import ProfilingSettings
+from .module import ProfilingModule
 
-__all__ = ["ProfilingModule", "ProfilingSettings", "__version__"]
+__all__ = ["ProfilingSettings", "ProfilingModule", "__version__"]
