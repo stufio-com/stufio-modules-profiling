@@ -9,7 +9,17 @@ class ProfilingSettings(ModuleSettings):
     ENABLE_PROMETHEUS: bool = True
     ENABLE_OPENTELEMETRY: bool = False
     ENABLE_PROFILING: bool = False  # Defaults to off due to performance impact
-
+    
+    # Query profiling settings
+    ENABLE_QUERY_PROFILING: bool = False  # Enable detailed query profiling
+    QUERY_PROFILING_SAMPLE_RATE: float = 0.1  # Profile 10% of queries by default
+    QUERY_PROFILING_THRESHOLD_MS: int = 100  # Log queries taking longer than 100ms
+    QUERY_PROFILING_MAX_QUERY_LENGTH: int = 1000  # Truncate long queries in logs
+    QUERY_PROFILING_LOG_PARAMS: bool = False  # Don't log parameters by default (may contain sensitive data)
+    QUERY_PROFILING_RETENTION_DAYS: int = 7  # Keep profiled queries for 7 days by default
+    QUERY_PROFILING_INCLUDE_STACKTRACE: bool = False  # Whether to include stacktrace info
+    QUERY_PROFILING_MAX_PER_REQUEST: int = 100  # Maximum number of queries per request
+    
     # Prometheus settings
     METRICS_ENDPOINT: str = "/metrics"
     METRICS_ROUTE_TAGS: list[str] = ["monitoring"]

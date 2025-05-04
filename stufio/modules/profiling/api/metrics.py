@@ -9,7 +9,7 @@ router = APIRouter()
 
 settings = get_settings()
 
-@router.get(settings.profiling_METRICS_ENDPOINT, tags=settings.profiling_METRICS_ROUTE_TAGS)
+@router.get("", response_class=Response)
 async def metrics(request: Request) -> Response:
     """Endpoint for exposing Prometheus metrics."""
     return Response(generate_latest(REGISTRY), headers={"Content-Type": CONTENT_TYPE_LATEST})

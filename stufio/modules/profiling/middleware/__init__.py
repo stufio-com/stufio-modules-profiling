@@ -1,5 +1,5 @@
-# This file is intentionally left blank.
-from .profiling_middleware import ProfilingMiddleware
 from .prometheus_middleware import PrometheusMiddleware
+from .profiling_middleware import ProfilingMiddleware
+from .query_profiling_middleware import QueryProfilingMiddleware
 
-__all__ = ["ProfilingMiddleware", "PrometheusMiddleware"]
+__all__ = ["PrometheusMiddleware", "ProfilingMiddleware", "QueryProfilingMiddleware"]
